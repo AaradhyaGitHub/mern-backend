@@ -1,0 +1,39 @@
+# Node modules (never track these)
+**/node_modules/
+
+# Logs
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/pnpm-debug.log*
+**/.pnpm-debug.log*
+
+# Environment variables
+**/.env
+**/.env.*  # Includes .env.development, .env.test, etc.
+
+# OS and IDE junk
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Build output (optional, depending on setup)
+**/dist/
+**/build/
+
+# Coverage reports
+**/coverage/
+
+# Temporary files
+**/*.log
+**/*.tmp
+**/*.swp
+
+# Database dumps (optional if you export MongoDB data)
+**/*.gz
+**/*.dump
+
+# Test-related
+**/.nyc_output/
+**/test-results/
