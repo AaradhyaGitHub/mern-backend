@@ -6,13 +6,28 @@ const http = require("http");
 
 // this is how you create a server
 const server = http.createServer((req, res) => {
-  console.log(req.url, req.method, req.headers);
+  const url = req.url;
+  if (url === "/") {
+    res.write(
+      `<html> 
+        <head>
+          <title>Enter Message</title>
+        <head> 
+        <body>
+          <form action='/message' method='POST'>
+             <input type='text'>
+          <button type='submit'>Send</button>
+          </form> 
+         </body>
+      </html> `
+    );
+    return res.end();
+  }
   // process.exit();  this kills the ongoing event loop
 
   res.setHeader("Content-Type", "text/html");
   res.write("<html> <p>Hello from my node js server</p> </html>");
   res.end();
-  
 });
 
 // listen will keep this running to listen for incoming request
