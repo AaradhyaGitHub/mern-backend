@@ -16,8 +16,8 @@ const server = http.createServer((req, res) => {
         <head> 
         <body>
           <form action='/message' method='POST'>
-             <input type='text'>
-          <button type='submit'>Send</button>
+             <input type='text' name="message">  <!-- Add the name attribute here -->
+             <button type='submit'>Send</button>
           </form> 
          </body>
       </html> `
@@ -27,7 +27,16 @@ const server = http.createServer((req, res) => {
   // process.exit();  this kills the ongoing event loop
 
   if (url === "/message" && method === "POST") {
-    fs.writeFileSync("message.txt", "DUMMY");
+    const body = [];
+    req.on("data", (chunk) => {
+      console.log(chunk);
+      body.push(chunk);
+    });
+    req.on("end", () => {
+      const parsedBody = Buffer.concat(body).toString();
+      const message = parsedBody.split("=")[1];
+      fs.writeFileSync("message.txt", message);
+    });
     res.statusCode = 302;
     res.setHeader("Location", "/");
     return res.end();
