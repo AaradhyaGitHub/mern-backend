@@ -1,5 +1,5 @@
 const http = require("http");
-
+const fs = require("fs");
 // requestListener is a function that will execute for every incoming request
 // it receives a request and a response object
 // rqListener(req, res){}
@@ -7,6 +7,7 @@ const http = require("http");
 // this is how you create a server
 const server = http.createServer((req, res) => {
   const url = req.url;
+  const method = req.method;
   if (url === "/") {
     res.write(
       `<html> 
@@ -24,6 +25,13 @@ const server = http.createServer((req, res) => {
     return res.end();
   }
   // process.exit();  this kills the ongoing event loop
+
+  if (url === "/message" && method === "POST") {
+    fs.writeFileSync("message.txt", "DUMMY");
+    res.statusCode = 302;
+    res.setHeader("Location", "/");
+    return res.end();
+  }
 
   res.setHeader("Content-Type", "text/html");
   res.write("<html> <p>Hello from my node js server</p> </html>");
