@@ -1,13 +1,17 @@
 import http from "http";
+import express from "express";
 
-import routes from "./routes.js"; // make sure the filename has .js extension
+const app = express();
 
-// requestListener is a function that will execute for every incoming request
-// it receives a request and a response object
-// rqListener(req, res){}
+app.use((req, res, next) => {
+  console.log("In the middleware!");
+  next();
+});
+app.use((req, res, next) => {
+  console.log("In another!");
+});
 
-// this is how you create a server
-const server = http.createServer(routes);
+const server = http.createServer(app);
 
 // listen will keep this running to listen for incoming request
 // it takes a port and a hostname
