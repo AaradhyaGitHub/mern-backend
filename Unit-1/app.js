@@ -44,7 +44,10 @@ app.use("/admin", adminData.routes);
 app.use(shopRoutes);
 
 app.use((req, res, next) => {
-  res.render("404", { pageTitle: "Not Found :(" });
+  res.status(404).render("404", {
+    pageTitle: "Not Found :(",
+    path: req.url // Pass the requested URL path here
+  });
 });
 
 app.listen(3000, () => {
