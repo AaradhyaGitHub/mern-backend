@@ -16,5 +16,8 @@
     "express": "^5.1.0",
     "express-handlebars": "3.0",
     "pug": "^3.0.3"
+  },
+  "devDependencies": {
+    "@types/express-handlebars": "^5.3.1"
   }
 }
