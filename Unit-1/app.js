@@ -2,24 +2,36 @@ const path = require("path");
 
 const express = require("express");
 const bodyParser = require("body-parser");
-const expressHbs = require("express-handlebars");
 
 const app = express();
+{
+  /*
 
-// handlebars setup
-// if hbs, file has to end in .hbs
-// if handlebars, file ends in .handlebars
-app.engine(
-  "hbs",
-  expressHbs({
-    layoutsDir: "views/layouts/",
-    defaultLayout: "main-layout",
-    extname: "hbs"
-  })
-);
-app.set("view engine", "hbs");
-// pug setup
-// app.set("view engine", "pug");
+        ---- handlebars file naming ----
+          if hbs -> file has to end in .hbs
+          if handlebars ->  file ends in .handlebars
+
+        ---- handlebars setup ----
+        const expressHbs = require("express-handlebars");
+        app.engine(
+          "hbs",
+          expressHbs({
+            layoutsDir: "views/layouts/",
+            defaultLayout: "main-layout",
+            extname: "hbs" -> this targets the layout file only
+          })
+        );
+        app.set("view engine", "hbs");
+
+        ---- pug setup ----
+        pug setup
+        app.set("view engine", "pug");
+  
+  */
+}
+
+// EJS Setup
+app.set("view engine", "ejs");
 app.set("views", "views");
 
 const adminData = require("./routes/admin");
