@@ -1,4 +1,3 @@
-````markdown
 # Pug Template Engine Demo
 
 This is a very simple demo app that showcases how to use the **Pug** template engine with **Node.js** and **Express**.
@@ -17,25 +16,6 @@ The app demonstrates how to render dynamic data using Pug templates. It holds a 
 
 1. Clone the repo or download the files.
 2. Install dependencies:
-
    ```bash
    npm install
    ```
-````
-
-3. Run the server:
-
-   ```bash
-   node app.js
-   ```
-
-4. Visit `http://localhost:3000` in your browser.
-
-## Notes
-
-- This was a quick 20-minute exercise to practice using Pug with Express.
-- The user data is not fetched from a database—it's a static array in the backend.
-
-```
-
-```
