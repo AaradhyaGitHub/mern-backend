@@ -1,6 +1,7 @@
 # Understanding Node.js MVC Pattern with File-Based Data Storage
 
 ## Table of Contents
+
 - [Introduction](#introduction)
 - [MVC Architecture Overview](#mvc-architecture-overview)
 - [Code Breakdown](#code-breakdown)
@@ -30,6 +31,7 @@ Before diving into the code, let's understand what MVC is and why it matters:
 **Controller**: Acts as an intermediary between Model and View. It processes requests, interacts with the Model to fetch or manipulate data, and passes that data to the View. In your code, this is implemented in the exported functions.
 
 The flow typically goes:
+
 1. User makes a request
 2. Controller receives the request
 3. Controller interacts with the Model to get/update data
@@ -95,50 +97,56 @@ module.exports = class Product {
 
 4. `constructor(title) { this.title = title; }` - The constructor method initializes a new Product instance with a title.
 
-5-9. `save()` method setup:
-   ```javascript
-   save() {
-     const p = path.join(
-       path.dirname(require.main.filename),
-       "data",
-       "products.json"
-     );
-   ```
-   This constructs a path to a JSON file where products will be stored. `require.main.filename` gives the path to the main entry file of the application, and `path.dirname()` gets its directory. Then it joins that with "data/products.json" to get the full path.
+Line 5-9. `save()` method setup:
 
-10-22. The `save()` method implementation:
-   ```javascript
-   fs.readFile(p, (err, fileContent) => {
-     let products = [];
-     if (!err) {
-       products = JSON.parse(fileContent);
-     }
-     products.push(this);
+```javascript
+save() {
+  const p = path.join(
+    path.dirname(require.main.filename),
+    "data",
+    "products.json"
+  );
+```
 
-     fs.writeFile(p, JSON.stringify(products), (err) => {
-       console.log(err);
-     });
-   });
-   ```
-   This reads the products file asynchronously, parses the JSON content, adds the current product instance to the array, and writes the updated array back to the file.
+This constructs a path to a JSON file where products will be stored. `require.main.filename` gives the path to the main entry file of the application, and `path.dirname()` gets its directory. Then it joins that with "data/products.json" to get the full path.
 
-23-33. The `static fetchAll(cb)` method:
-   ```javascript
-   static fetchAll(cb) {
-     const p = path.join(
-       path.dirname(require.main.filename),
-       "data",
-       "products.json"
-     );
-     fs.readFile(p, (err, fileContent) => {
-       if (err) {
-         cb([]);
-       }
-       cb(JSON.parse(fileContent));
-     });
-   }
-   ```
-   This static method reads all products from the file and passes them to a callback function. If there's an error (like the file doesn't exist yet), it calls the callback with an empty array.
+Line 10-22. The `save()` method implementation:
+
+```javascript
+fs.readFile(p, (err, fileContent) => {
+  let products = [];
+  if (!err) {
+    products = JSON.parse(fileContent);
+  }
+  products.push(this);
+
+  fs.writeFile(p, JSON.stringify(products), (err) => {
+    console.log(err);
+  });
+});
+```
+
+This reads the products file asynchronously, parses the JSON content, adds the current product instance to the array, and writes the updated array back to the file.
+
+Line 23-33. The `static fetchAll(cb)` method:
+
+```javascript
+static fetchAll(cb) {
+  const p = path.join(
+    path.dirname(require.main.filename),
+    "data",
+    "products.json"
+  );
+  fs.readFile(p, (err, fileContent) => {
+    if (err) {
+      cb([]);
+    }
+    cb(JSON.parse(fileContent));
+  });
+}
+```
+
+This static method reads all products from the file and passes them to a callback function. If there's an error (like the file doesn't exist yet), it calls the callback with an empty array.
 
 ### The Controller
 
@@ -179,46 +187,52 @@ exports.getProducts = (req, res, next) => {
 
 1. `const Product = require("../models/product");` - Imports the Product model.
 
-2-10. `exports.getAddProduct`:
-   ```javascript
-   exports.getAddProduct = (req, res, next) => {
-     res.render("add-product", {
-       pageTitle: "Add Product",
-       path: "/admin/add-product",
-       formsCSS: true,
-       productCSS: true,
-       activeAddProduct: true
-     });
-   };
-   ```
-   This controller method renders the "add-product" view with various template variables.
+Line 2-10. `exports.getAddProduct`:
 
-11-15. `exports.postAddProduct`:
-   ```javascript
-   exports.postAddProduct = (req, res, next) => {
-     const product = new Product(req.body.title);
-     product.save();
-     res.redirect("/");
-   };
-   ```
-   This method handles form submissions to add a new product. It creates a new Product instance with the submitted title, saves it, and redirects to the home page.
+```javascript
+exports.getAddProduct = (req, res, next) => {
+  res.render("add-product", {
+    pageTitle: "Add Product",
+    path: "/admin/add-product",
+    formsCSS: true,
+    productCSS: true,
+    activeAddProduct: true
+  });
+};
+```
 
-16-26. `exports.getProducts`:
-   ```javascript
-   exports.getProducts = (req, res, next) => {
-     const products = Product.fetchAll((products) => {
-       res.render("shop", {
-         prods: products,
-         pageTitle: "Shop",
-         path: "/",
-         hasProducts: products.length > 0,
-         activeShop: true,
-         productCSS: true
-       });
-     });
-   };
-   ```
-   This method fetches all products and renders the "shop" view with the retrieved data. Note that `fetchAll` takes a callback function that's executed when the data is ready.
+This controller method renders the "add-product" view with various template variables.
+
+Line 11-15. `exports.postAddProduct`:
+
+```javascript
+exports.postAddProduct = (req, res, next) => {
+  const product = new Product(req.body.title);
+  product.save();
+  res.redirect("/");
+};
+```
+
+This method handles form submissions to add a new product. It creates a new Product instance with the submitted title, saves it, and redirects to the home page.
+
+Line 16-26. `exports.getProducts`:
+
+```javascript
+exports.getProducts = (req, res, next) => {
+  const products = Product.fetchAll((products) => {
+    res.render("shop", {
+      prods: products,
+      pageTitle: "Shop",
+      path: "/",
+      hasProducts: products.length > 0,
+      activeShop: true,
+      productCSS: true
+    });
+  });
+};
+```
+
+This method fetches all products and renders the "shop" view with the retrieved data. Note that `fetchAll` takes a callback function that's executed when the data is ready.
 
 ## Detailed Analysis
 
@@ -271,7 +285,9 @@ And here's how it's used in the controller:
 exports.getProducts = (req, res, next) => {
   const products = Product.fetchAll((products) => {
     // This function runs when the data is ready
-    res.render("shop", { /* ... */ });
+    res.render("shop", {
+      /* ... */
+    });
   });
 };
 ```
@@ -293,6 +309,7 @@ const p = path.join(
 This creates a path relative to the main application file, regardless of the current working directory when the script is run. It ensures that the paths work consistently across different environments and when running the application from different directories.
 
 Breaking it down:
+
 - `require.main.filename` gives the path to the entry point file of the application
 - `path.dirname()` extracts the directory path
 - `path.join()` combines path segments in a platform-independent way
@@ -301,13 +318,16 @@ Breaking it down:
 
 1. **Missing Return Statement in Conditional**:
    In the `fetchAll` method, there's a bug:
+
    ```javascript
    if (err) {
      cb([]);
    }
    cb(JSON.parse(fileContent));
    ```
+
    If there's an error, it calls `cb([])` but then still tries to parse `fileContent` (which might be undefined). This should be:
+
    ```javascript
    if (err) {
      return cb([]);
@@ -328,7 +348,7 @@ Breaking it down:
 ```javascript
 save() {
   const p = path.join(path.dirname(require.main.filename), "data", "products.json");
-  
+
   return fs.promises.readFile(p)
     .then(fileContent => {
       let products = [];
@@ -348,7 +368,7 @@ save() {
 
 static fetchAll() {
   const p = path.join(path.dirname(require.main.filename), "data", "products.json");
-  
+
   return fs.promises.readFile(p)
     .then(fileContent => {
       return JSON.parse(fileContent);
@@ -364,7 +384,7 @@ static fetchAll() {
 ```javascript
 async save() {
   const p = path.join(path.dirname(require.main.filename), "data", "products.json");
-  
+
   try {
     const fileContent = await fs.promises.readFile(p);
     const products = JSON.parse(fileContent);
@@ -378,7 +398,7 @@ async save() {
 
 static async fetchAll() {
   const p = path.join(path.dirname(require.main.filename), "data", "products.json");
-  
+
   try {
     const fileContent = await fs.promises.readFile(p);
     return JSON.parse(fileContent);
