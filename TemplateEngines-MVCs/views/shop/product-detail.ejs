@@ -11,9 +11,8 @@
             </div>
             <h2 step="0.01">$<%= prod.price %></h2>
             <p><%= prod.description %></p>
-            <form action="/cart" method="POST">
-                <button class="btn" type="submit">Add To Cart</button>
-            </form>
+            <%- include ('../includes/add-to-cart.ejs') %>
+
         </main>
         
             
