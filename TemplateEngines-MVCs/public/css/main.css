@@ -19,6 +19,44 @@ form {
   display: inline;
 }
 
+.centered {
+  text-align: center;
+  max-width: 600px;
+  margin: 2rem auto;
+  font-family: Arial, sans-serif;
+  padding: 1rem;
+}
+
+.centered img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+}
+
+.centered h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.centered h2 {
+  font-size: 1.5rem;
+  color: #27ae60;
+  margin-top: 0.5rem;
+}
+
+.centered p {
+  max-height: 150px;
+  overflow-y: auto;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fafafa;
+  font-size: 0.95rem;
+  color: #333;
+}
+
 .main-header {
   width: 100%;
   height: 3.5rem;

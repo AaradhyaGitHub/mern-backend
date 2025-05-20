@@ -3,7 +3,21 @@
     "title": "2014 Mercedes AMG SLS Black Series",
     "imageUrl": "https://bringatrailer.com/wp-content/uploads/2022/02/2014_mercedes-benz_sls-amg-black-series_198a5389-lowres-72209.jpg",
     "description": "The 2014 SLS AMG Black Series accelerates to 60 mph in just 3.5 seconds, and onward to a top speed of 196 mph of power. Compared to the 583 hp delivered by the SLS AMG GT, the additional 39 hp of the Black Series is a result of the following enhancements: Increase in maximum engine speed from 7,200 to 8,000 rpm",
-    "price": "900000",
+    "price": "900,000",
     "id": "23984756"
+  },
+  {
+    "title": "2022 Corvette ZR1 ",
+    "imageUrl": "https://static1.topspeedimages.com/wordpress/wp-content/uploads/2022/12/hennessey-corvette-zr1.jpg",
+    "description": "The 2022 Chevrolet Corvette ZR1 is a high-performance sports car with a focus on both speed and handling. It features a twin-turbocharged 5.5-liter V8 engine, generating 1,064 horsepower and 828 lb-ft of torque according to GM News. The ZR1 also utilizes extensive aerodynamics, including a high downforce carbon fiber rear wing, front dive planes, and other aerodynamic enhancements. It's equipped with carbon ceramic brakes for exceptional stopping power. ",
+    "price": "174,995",
+    "id": "0.23543742300013304"
+  },
+  {
+    "title": "Audi RS7",
+    "imageUrl": "https://www.topgear.com/sites/default/files/2023/07/ABT_RS7_LE%20%2824%29.jpg",
+    "description": "The Audi RS 7 is a high-performance hatchback sedan that blends luxury with incredible power and agility. It's powered by a 4.0-liter V8 biturbo TFSI engine, producing up to 621 horsepower, and can accelerate from 0 to 60 mph in just 3.3 seconds.",
+    "price": "128,600",
+    "id": "0.2991700694907631"
   }
 ]
