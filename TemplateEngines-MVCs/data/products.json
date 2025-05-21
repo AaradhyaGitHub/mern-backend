@@ -19,5 +19,12 @@
     "description": "The Audi RS 7 is a high-performance hatchback sedan that blends luxury with incredible power and agility. It's powered by a 4.0-liter V8 biturbo TFSI engine, producing up to 621 horsepower, and can accelerate from 0 to 60 mph in just 3.3 seconds.",
     "price": "128600",
     "id": "0.2991700694907631"
+  },
+  {
+    "title": "Toyota corolla 2022",
+    "imageUrl": "https://www.clickheretesting.com/SunriseToyota/research/2022/corolla/images/mlp-img-ext.jpg",
+    "description": "The stylish 2022 Toyota Corolla and efficient 2022 Toyota Corolla Hybrid take fun to the\r\nnext level. With a sleek design, the latest tech and standard Toyota Safety Sense™ 2.0 (TSS 2.0),\r\nthe 2022 Toyota Corolla lineup is ready to create something unforgettable",
+    "price": "30000",
+    "id": "0.05830540724162625"
   }
 ]
