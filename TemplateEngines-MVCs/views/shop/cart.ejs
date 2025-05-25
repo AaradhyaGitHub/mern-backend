@@ -1,6 +1,74 @@
 <%- include('../includes/head.ejs') %>
-    </head>
-    
-    <body>
-        <%- include('../includes/navigation.ejs') %>
-            <%- include('../includes/end.ejs') %>
+</head>
+
+<body>
+  <%- include('../includes/navigation.ejs') %>
+
+  <main>
+    <% if (products && products.length > 0) { %>
+      <ul style="list-style:none; padding:0; max-width:600px; margin: 20px auto;">
+        <% products.forEach(p => { %>
+          <li
+            style="
+              display: flex;
+              align-items: center;
+              padding: 12px 18px;
+              margin-bottom: 14px;
+              border: 1px solid #ddd;
+              border-radius: 8px;
+              box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+              transition: box-shadow 0.3s ease;
+              cursor: default;
+            "
+            onmouseover="this.style.boxShadow='0 6px 18px rgba(0,0,0,0.15)'"
+            onmouseout="this.style.boxShadow='0 2px 5px rgba(0,0,0,0.05)'"
+          >
+            <% if (p.productData.imageUrl) { %>
+              <img
+                src="<%= p.productData.imageUrl %>"
+                alt="<%= p.productData.title || 'Product image' %>"
+                style="
+                  width: 100px;
+                  height: 100px;
+                  object-fit: contain;
+                  border-radius: 8px;
+                  margin-right: 18px;
+                  flex-shrink: 0;
+                  background: #f9f9f9;
+                  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+                "
+              />
+            <% } else { %>
+              <span
+                style="
+                  display: inline-block;
+                  width: 100px;
+                  height: 100px;
+                  background: #ccc;
+                  border-radius: 8px;
+                  margin-right: 18px;
+                  flex-shrink: 0;
+                "
+              ></span>
+            <% } %>
+            <div style="flex-grow: 1;">
+              <strong style="font-size: 1.2rem; color: #333;"><%= p.productData.title %></strong>
+              <div style="color: #666; margin-top: 6px; font-size: 1rem;">
+                Price: <span style="font-weight: 600; color: #000;">$<%= Number(p.productData.price || 0).toFixed(2) %></span> 
+                &nbsp;&bull;&nbsp; Qty: <%= p.qty %>
+              </div>
+            </div>
+            <form action="/cart-delete-item" method="POST">
+              <input type="hidden" value = "<%= p.productData.id %>" name="productId">
+              <button class="btn" type=""submit>Delete 🗑️</button>
+            </form>
+          </li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <h1 style="text-align:center; color:#999; margin-top:50px;">No Products In Cart :(</h1>
+    <% } %>
+  </main>
+
+  <%- include('../includes/end.ejs') %>
+</body>
