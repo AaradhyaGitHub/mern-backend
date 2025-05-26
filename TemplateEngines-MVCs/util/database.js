@@ -4,5 +4,5 @@ const pool = mysql.createPool({
   host: "localhost",
   user: "root",
   database: "node-complete",
-  password: "nodecompletetest"
+  password: "nodecompletetest3"
 });
