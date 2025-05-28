@@ -63,7 +63,6 @@ app.use(errorController.get404Page);
 sequelize
   .sync()
   .then((result) => {
-    console.log(result);
     app.listen(3000, () => {
       console.log("Server is running on http://localhost:3000");
     });
