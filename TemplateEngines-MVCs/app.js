@@ -50,7 +50,6 @@ const shopRoutes = require("./routes/shop");
     console.log(err);
   });
 
-  
   */
 }
 
