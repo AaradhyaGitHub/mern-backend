@@ -23,10 +23,10 @@
             onmouseover="this.style.boxShadow='0 6px 18px rgba(0,0,0,0.15)'"
             onmouseout="this.style.boxShadow='0 2px 5px rgba(0,0,0,0.05)'"
           >
-            <% if (p.productData.imageUrl) { %>
+            <% if (p.imageUrl) { %>
               <img
-                src="<%= p.productData.imageUrl %>"
-                alt="<%= p.productData.title || 'Product image' %>"
+                src="<%= p.imageUrl %>"
+                alt="<%= p.title || 'Product image' %>"
                 style="
                   width: 100px;
                   height: 100px;
@@ -52,14 +52,14 @@
               ></span>
             <% } %>
             <div style="flex-grow: 1;">
-              <strong style="font-size: 1.2rem; color: #333;"><%= p.productData.title %></strong>
+              <strong style="font-size: 1.2rem; color: #333;"><%= p.title %></strong>
               <div style="color: #666; margin-top: 6px; font-size: 1rem;">
-                Price: <span style="font-weight: 600; color: #000;">$<%= Number(p.productData.price || 0).toFixed(2) %></span> 
-                &nbsp;&bull;&nbsp; Qty: <%= p.qty %>
+                Price: <span style="font-weight: 600; color: #000;">$<%= Number(p.price || 0).toFixed(2) %></span> 
+                &nbsp;&bull;&nbsp; Qty: <%= p.cartItem.quantity %>
               </div>
             </div>
             <form action="/cart-delete-item" method="POST">
-              <input type="hidden" value = "<%= p.productData.id %>" name="productId">
+              <input type="hidden" value = "<%= p.id %>" name="productId">
               <button class="btn" type=""submit>Delete 🗑️</button>
             </form>
           </li>
